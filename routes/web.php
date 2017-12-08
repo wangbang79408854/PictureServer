@@ -11,6 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+
+Auth::routes();
+
+
+Route::get('/there', function (){
+    return 'Hello World there';
 });
+
+Route::get('/Article', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
+    Route::get('/', 'HomeController@index');
+    Route::get('article', 'ArticleController@index');
+});
+
+
+Route::redirect('/here', '/there', 301);
+

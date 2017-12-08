@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Illuminate\Http\Request;
 use Fideloper\Proxy\TrustProxies as Middleware;
 
@@ -26,4 +27,8 @@ class TrustProxies extends Middleware
         Request::HEADER_X_FORWARDED_PORT => 'X_FORWARDED_PORT',
         Request::HEADER_X_FORWARDED_PROTO => 'X_FORWARDED_PROTO',
     ];
+
+
+
+
 }
