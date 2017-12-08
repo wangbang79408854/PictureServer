@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2015 Justin Hileman
+ * (c) 2012-2017 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -47,10 +47,16 @@ class ObjectMethodsMatcher extends AbstractContextAwareMatcher
             return array();
         }
 
+        if (!is_object($object)) {
+            return array();
+        }
+
         return array_filter(
             get_class_methods($object),
             function ($var) use ($input) {
-                return AbstractMatcher::startsWith($input, $var);
+                return AbstractMatcher::startsWith($input, $var) &&
+                    // also check that we do not suggest invoking a super method(__construct, __wakeup, …)
+                    !AbstractMatcher::startsWith('__', $var);
             }
         );
     }

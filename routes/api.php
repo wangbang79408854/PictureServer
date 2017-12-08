@@ -1,18 +1,23 @@
 <?php
 
-$api = app('api.router');
-$api->version('v1', ['namespace' => 'App\Http\Controllers'], function ($api) {
+use Illuminate\Http\Request;
 
-    /** @var \Dingo\Api\Routing\Router $api */
-    $api->get('/', function () {
-        //測試路由
-        return  "当前服务器版本" . app()->version();
-    });
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
 
-//    $api->resource('reports', 'ReportController');
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
-  //  $api->group(['middleware' => 'jwt.auth'], function ($api) {
-    //
-   // });
 
+Route::get('/', function () {
+    return '当前服务器版本' . app()->version();
 });
